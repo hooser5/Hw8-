@@ -1,0 +1,1291 @@
+/* ==========================================================================
+   THE DETECTIVE'S DESK - UNCONVENTIONAL PORTFOLIO STYLES
+   Colors:
+     1. Deep Mahogany Wood: #221209
+     2. Aged Parchment Cream: #f7eedb
+     3. Evidence Crimson Red: #9e2a2b
+     4. Vintage Brass Gold: #c79738
+     5. Typewriter Ink Black: #191614
+     6. Manila Cardstock Tan: #dfc28d
+   Google Fonts: 'Special Elite' and 'Courier Prime'
+   ========================================================================== */
+
+:root {
+    --wood-dark: #1e1007;
+    --wood-mid: #2d180c;
+    --wood-light: #3e2212;
+    --leather-mat: #291d18;
+    --leather-border: #442f27;
+    --parchment: #f6eedc;
+    --parchment-shadow: #e0d2b8;
+    --manila-folder: #dfc28d;
+    --manila-tab: #cdb07c;
+    --notebook-black: #252422;
+    --crimson-stamp: #9e2a2b;
+    --crimson-glow: rgba(158, 42, 43, 0.4);
+    --brass-gold: #c79738;
+    --brass-highlight: #f3d478;
+    --ink-black: #191614;
+    --ink-faded: #4d443e;
+    --lamp-glow: rgba(255, 204, 102, 0.28);
+    --lamp-center: rgba(255, 235, 179, 0.45);
+    
+    --font-typewriter: 'Special Elite', 'Courier New', monospace;
+    --font-mono: 'Courier Prime', Courier, monospace;
+    
+    --shadow-soft: 0 4px 12px rgba(0, 0, 0, 0.35);
+    --shadow-deep: 0 12px 30px rgba(0, 0, 0, 0.55);
+    --transition-snappy: all 0.25s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+/* Base Reset & Box Sizing */
+*, *::before, *::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+html, body {
+    width: 100%;
+    min-height: 100vh;
+    background-color: var(--wood-dark);
+    color: var(--ink-black);
+    font-family: var(--font-mono);
+    overflow-x: hidden;
+    line-height: 1.5;
+}
+
+/* Desk Surface Background (Rich Wood Grain via CSS Radial & Linear Gradients) */
+.desk-body {
+    background-color: var(--wood-mid);
+    background-image: 
+        radial-gradient(circle at 50% 30%, rgba(255, 255, 255, 0.04) 0%, transparent 70%),
+        repeating-linear-gradient(90deg, 
+            transparent 0px, 
+            transparent 48px, 
+            rgba(0, 0, 0, 0.18) 49px, 
+            rgba(0, 0, 0, 0.28) 50px
+        ),
+        linear-gradient(180deg, var(--wood-dark) 0%, var(--wood-mid) 50%, #150a04 100%);
+    background-attachment: fixed;
+    position: relative;
+    transition: filter 0.5s ease;
+}
+
+/* Dark Mode when Lamp is Off */
+.desk-body.lamp-off {
+    background-color: #0d0805;
+    background-image: 
+        repeating-linear-gradient(90deg, 
+            transparent 0px, 
+            transparent 48px, 
+            rgba(0, 0, 0, 0.3) 49px, 
+            rgba(0, 0, 0, 0.4) 50px
+        ),
+        linear-gradient(180deg, #090503 0%, #110906 100%);
+}
+
+.desk-body.lamp-off .ambient-glow {
+    opacity: 0.08;
+}
+
+.desk-body.lamp-off .lamp-head {
+    filter: brightness(0.4);
+}
+
+.desk-body.lamp-off .lamp-bulb {
+    box-shadow: none;
+    background: #554422;
+}
+
+/* Ambient Lamp Light Cone */
+.ambient-glow {
+    position: fixed;
+    top: -100px;
+    left: 20%;
+    width: 65vw;
+    height: 75vh;
+    border-radius: 50%;
+    background: radial-gradient(ellipse at center, var(--lamp-center) 0%, var(--lamp-glow) 45%, transparent 75%);
+    pointer-events: none;
+    z-index: 1;
+    transition: opacity 0.4s ease;
+}
+
+/* Noir Film Vignette */
+.vignette-overlay {
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    background: radial-gradient(circle at center, transparent 40%, rgba(10, 5, 2, 0.75) 100%);
+    z-index: 2;
+}
+
+/* Main Desk Container (Organized Workspace) */
+.desk-container {
+    position: relative;
+    z-index: 3;
+    max-width: 1300px;
+    margin: 0 auto;
+    padding: 2.5rem 1.5rem 4rem 1.5rem;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+/* Sound Toggle Button */
+.audio-toggle-container {
+    align-self: flex-end;
+    margin-bottom: 0.75rem;
+    z-index: 5;
+}
+
+.desk-pill-btn {
+    background: #1c140f;
+    color: var(--brass-gold);
+    border: 1px solid var(--brass-gold);
+    padding: 0.35rem 0.85rem;
+    border-radius: 20px;
+    font-family: var(--font-typewriter);
+    font-size: 0.85rem;
+    cursor: pointer;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.4);
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    transition: var(--transition-snappy);
+}
+
+.desk-pill-btn:hover {
+    background: var(--brass-gold);
+    color: var(--ink-black);
+    transform: translateY(-1px);
+}
+
+/* Desk Accessories: Lamp & Coffee Mug */
+.lamp-wrapper {
+    position: absolute;
+    top: 2rem;
+    left: 2rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    cursor: pointer;
+    z-index: 4;
+}
+
+.lamp-head {
+    width: 64px;
+    height: 38px;
+    background: linear-gradient(135deg, var(--brass-highlight), var(--brass-gold) 60%, #85611c);
+    border-radius: 35px 35px 8px 8px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.5);
+    position: relative;
+    border: 1px solid #735316;
+}
+
+.lamp-bulb {
+    width: 28px;
+    height: 14px;
+    background: #fff6d6;
+    border-radius: 0 0 14px 14px;
+    margin: 22px auto 0 auto;
+    box-shadow: 0 0 16px #ffea9f, 0 0 30px #ffd066;
+    transition: var(--transition-snappy);
+}
+
+.lamp-neck {
+    width: 7px;
+    height: 40px;
+    background: linear-gradient(90deg, #7c5c1e, var(--brass-highlight), #533d13);
+    border-radius: 3px;
+}
+
+.lamp-base {
+    width: 50px;
+    height: 16px;
+    background: linear-gradient(180deg, var(--brass-highlight), var(--brass-gold), #553e14);
+    border-radius: 12px 12px 4px 4px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 0 3px 8px rgba(0,0,0,0.6);
+}
+
+.lamp-switch {
+    width: 14px;
+    height: 14px;
+    background: #111;
+    border-radius: 50%;
+    border: 1px solid var(--brass-highlight);
+    cursor: pointer;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.switch-toggle {
+    width: 6px;
+    height: 6px;
+    background: #ff3333;
+    border-radius: 50%;
+    display: block;
+}
+
+.lamp-on .switch-toggle {
+    background: #44ff44;
+    box-shadow: 0 0 5px #44ff44;
+}
+
+/* Coffee Mug */
+.coffee-mug {
+    position: absolute;
+    top: 2.2rem;
+    right: 3rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    cursor: pointer;
+    z-index: 4;
+    transition: transform 0.2s ease;
+}
+
+.coffee-mug:hover {
+    transform: scale(1.05);
+}
+
+.mug-surface {
+    width: 58px;
+    height: 58px;
+    background: #e5ded3;
+    border: 5px solid #cac0b1;
+    border-radius: 50%;
+    box-shadow: inset 0 3px 6px rgba(0,0,0,0.3), var(--shadow-soft);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.coffee-liquid {
+    width: 42px;
+    height: 42px;
+    background: radial-gradient(circle, #22140d 60%, #150c07 100%);
+    border-radius: 50%;
+    position: relative;
+    overflow: hidden;
+}
+
+.coffee-ripple {
+    position: absolute;
+    inset: 4px;
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    border-radius: 50%;
+    animation: ripplePulse 4s infinite ease-in-out;
+}
+
+@keyframes ripplePulse {
+    0%, 100% { transform: scale(0.85); opacity: 0.3; }
+    50% { transform: scale(1.08); opacity: 0.7; }
+}
+
+.mug-handle {
+    position: absolute;
+    right: -10px;
+    top: 14px;
+    width: 14px;
+    height: 28px;
+    border: 4px solid #cac0b1;
+    border-left: none;
+    border-radius: 0 12px 12px 0;
+}
+
+.object-tag {
+    font-family: var(--font-typewriter);
+    font-size: 0.7rem;
+    color: var(--brass-gold);
+    opacity: 0.75;
+    margin-top: 6px;
+    text-shadow: 1px 1px 2px #000;
+}
+
+/* Leather Blotter / Desk Mat (The Stage for Desk Artifacts) */
+.desk-mat {
+    width: 100%;
+    background-color: var(--leather-mat);
+    border: 4px solid var(--leather-border);
+    border-radius: 12px;
+    box-shadow: 
+        inset 0 0 25px rgba(0,0,0,0.85),
+        0 14px 35px rgba(0,0,0,0.7);
+    padding: 2.5rem 2rem;
+    position: relative;
+    display: grid;
+    grid-template-columns: repeat(12, 1fr);
+    grid-gap: 1.8rem;
+    align-items: start;
+}
+
+/* Common Interactive Desk Item Behaviors */
+.desk-item {
+    cursor: pointer;
+    transition: transform 0.28s cubic-bezier(0.2, 0.8, 0.2, 1), box-shadow 0.28s ease;
+    user-select: none;
+    position: relative;
+}
+
+.desk-item:hover {
+    transform: translateY(-8px) scale(1.02) !important;
+    box-shadow: var(--shadow-deep) !important;
+    z-index: 10 !important;
+}
+
+.desk-item:focus-visible {
+    outline: 3px dashed var(--brass-gold);
+    outline-offset: 4px;
+}
+
+/* 1. The Pinned Concept Paper (Explaining the Unconventional Concept) */
+.concept-paper {
+    grid-column: span 7;
+    background-color: var(--parchment);
+    color: var(--ink-black);
+    padding: 2rem 2.2rem 2rem 2.2rem;
+    box-shadow: 4px 6px 18px rgba(0,0,0,0.45);
+    border-left: 2px solid #e2d2b5;
+    position: relative;
+    transform: rotate(-1deg);
+    cursor: default; /* Information document */
+}
+
+.pushpin {
+    position: absolute;
+    top: 10px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 16px;
+    height: 16px;
+    background: radial-gradient(circle at 35% 35%, #ff5252, var(--crimson-stamp) 75%, #4a0d0e);
+    border-radius: 50%;
+    box-shadow: 2px 4px 6px rgba(0,0,0,0.6);
+    z-index: 2;
+}
+
+.pushpin::after {
+    content: '';
+    position: absolute;
+    top: 14px;
+    left: 7px;
+    width: 2px;
+    height: 8px;
+    background: #666;
+}
+
+.paper-watermark {
+    position: absolute;
+    top: 45%;
+    left: 50%;
+    transform: translate(-50%, -50%) rotate(-25deg);
+    font-family: var(--font-typewriter);
+    font-size: 3.5rem;
+    color: rgba(158, 42, 43, 0.08);
+    letter-spacing: 0.4rem;
+    font-weight: bold;
+    pointer-events: none;
+}
+
+.typewriter-header {
+    display: flex;
+    justify-content: space-between;
+    font-family: var(--font-typewriter);
+    font-size: 0.8rem;
+    letter-spacing: 0.08rem;
+    color: var(--ink-faded);
+    margin-bottom: 0.5rem;
+}
+
+.concept-title {
+    font-family: var(--font-typewriter);
+    font-size: 1.45rem;
+    font-weight: bold;
+    color: var(--ink-black);
+    letter-spacing: 0.05rem;
+    margin-bottom: 0.2rem;
+}
+
+.concept-subtitle {
+    font-family: var(--font-mono);
+    font-size: 0.85rem;
+    color: var(--crimson-stamp);
+    letter-spacing: 0.06rem;
+    font-weight: 700;
+}
+
+.typewriter-rule {
+    border: none;
+    border-top: 1px dashed var(--ink-faded);
+    margin: 0.75rem 0 1rem 0;
+}
+
+.concept-body {
+    font-family: var(--font-mono);
+    font-size: 0.95rem;
+    line-height: 1.65;
+    color: var(--ink-black);
+    text-align: justify;
+}
+
+.signature-block {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 1.25rem;
+    padding-top: 0.5rem;
+}
+
+.approved-stamp {
+    font-family: var(--font-typewriter);
+    font-size: 0.95rem;
+    color: var(--crimson-stamp);
+    border: 2px solid var(--crimson-stamp);
+    padding: 2px 10px;
+    transform: rotate(-6deg);
+    display: inline-block;
+    font-weight: bold;
+    letter-spacing: 0.12rem;
+    box-shadow: inset 0 0 0 1px rgba(158,42,43,0.3);
+}
+
+.scribble-sig {
+    font-family: 'Courier Prime', cursive;
+    font-style: italic;
+    font-size: 1rem;
+    color: #2b3a67;
+    border-bottom: 1px solid #777;
+    padding: 0 10px;
+}
+
+/* 2. Polaroid Photo Frame (Profile Picture Placeholder) */
+.polaroid-frame {
+    grid-column: span 5;
+    background: #ffffff;
+    padding: 1rem 1rem 1.4rem 1rem;
+    box-shadow: 3px 5px 15px rgba(0,0,0,0.5);
+    transform: rotate(3deg);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border-radius: 2px;
+}
+
+.scotch-tape {
+    position: absolute;
+    top: -12px;
+    width: 65px;
+    height: 24px;
+    background-color: rgba(230, 225, 205, 0.65);
+    border-left: 2px dashed rgba(255,255,255,0.4);
+    border-right: 2px dashed rgba(255,255,255,0.4);
+    box-shadow: 0 1px 3px rgba(0,0,0,0.2);
+    transform: rotate(-2deg);
+}
+
+.photo-container {
+    width: 100%;
+    aspect-ratio: 1 / 1;
+    max-height: 220px;
+    background: #1f1611;
+    overflow: hidden;
+    position: relative;
+    border: 1px solid #ddd;
+}
+
+.profile-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center 20%;
+    filter: contrast(1.02) brightness(0.98);
+    display: block;
+    transition: filter 0.3s ease;
+}
+
+.polaroid-frame:hover .profile-img {
+    filter: contrast(1.05) brightness(1.02);
+}
+
+.polaroid-caption {
+    margin-top: 0.85rem;
+    text-align: center;
+    width: 100%;
+}
+
+.agent-title {
+    font-family: var(--font-typewriter);
+    font-weight: bold;
+    font-size: 0.95rem;
+    color: var(--ink-black);
+    letter-spacing: 0.05rem;
+}
+
+.agent-subtitle {
+    font-family: var(--font-typewriter);
+    font-size: 0.72rem;
+    color: var(--crimson-stamp);
+    letter-spacing: 0.05rem;
+    margin-top: 2px;
+    font-weight: bold;
+}
+
+.click-hint {
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    color: var(--crimson-stamp);
+    margin-top: 3px;
+    font-weight: bold;
+}
+
+/* 3. Manila Case File Folder (Projects Archive) */
+.manila-folder {
+    grid-column: span 4;
+    background: var(--manila-folder);
+    min-height: 180px;
+    border-radius: 0 10px 6px 6px;
+    box-shadow: 4px 6px 16px rgba(0,0,0,0.45);
+    position: relative;
+    transform: rotate(-2deg);
+    border-top: 1px solid #ebd3a8;
+}
+
+.folder-tab {
+    position: absolute;
+    top: -24px;
+    left: 0;
+    background: var(--manila-tab);
+    padding: 4px 18px;
+    border-radius: 8px 8px 0 0;
+    box-shadow: 0 -2px 5px rgba(0,0,0,0.15);
+    font-family: var(--font-typewriter);
+    font-size: 0.75rem;
+    font-weight: bold;
+    color: var(--ink-black);
+    letter-spacing: 0.05rem;
+}
+
+.folder-body {
+    padding: 1.4rem 1.2rem;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    justify-content: space-between;
+}
+
+.folder-seal {
+    align-self: flex-end;
+    font-family: var(--font-typewriter);
+    font-size: 0.75rem;
+    color: var(--crimson-stamp);
+    border: 1px solid var(--crimson-stamp);
+    padding: 2px 8px;
+    font-weight: bold;
+    letter-spacing: 0.1rem;
+    transform: rotate(5deg);
+}
+
+.folder-title {
+    font-family: var(--font-typewriter);
+    font-size: 1.15rem;
+    font-weight: bold;
+    color: var(--ink-black);
+    margin-top: 0.4rem;
+}
+
+.folder-desc {
+    font-family: var(--font-mono);
+    font-size: 0.8rem;
+    color: var(--ink-faded);
+    margin-top: 0.3rem;
+}
+
+.click-tag {
+    display: inline-block;
+    margin-top: 1rem;
+    font-family: var(--font-typewriter);
+    font-size: 0.75rem;
+    background: rgba(0,0,0,0.08);
+    padding: 4px 8px;
+    border-radius: 3px;
+    color: var(--ink-black);
+    font-weight: bold;
+}
+
+/* 4. Field Notebook (Technical Arsenal / Skills) */
+.field-notebook {
+    grid-column: span 4;
+    background: var(--notebook-black);
+    color: #e6dfd5;
+    min-height: 180px;
+    border-radius: 6px;
+    box-shadow: 4px 6px 16px rgba(0,0,0,0.5);
+    position: relative;
+    transform: rotate(1.5deg);
+    border: 1px solid #3d3b37;
+    overflow: hidden;
+}
+
+.notebook-binding {
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    width: 14px;
+    background: repeating-linear-gradient(180deg, #111 0px, #111 8px, #333 9px, #333 11px);
+    border-right: 1px solid #444;
+}
+
+.notebook-cover {
+    padding: 1.4rem 1.2rem 1.4rem 2rem;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+
+.notebook-label {
+    font-family: var(--font-typewriter);
+    font-size: 0.8rem;
+    letter-spacing: 0.1rem;
+    color: var(--brass-gold);
+    border-bottom: 1px solid var(--brass-gold);
+    padding-bottom: 4px;
+    display: inline-block;
+}
+
+.notebook-subtitle {
+    font-family: var(--font-typewriter);
+    font-size: 1.05rem;
+    margin-top: 0.8rem;
+    color: #fff;
+    line-height: 1.3;
+}
+
+.field-notebook .click-tag {
+    background: rgba(255, 255, 255, 0.1);
+    color: var(--brass-highlight);
+    margin-top: auto;
+}
+
+.elastic-band {
+    position: absolute;
+    right: 18px;
+    top: 0;
+    bottom: 0;
+    width: 6px;
+    background: #111;
+    box-shadow: 1px 0 3px rgba(0,0,0,0.8);
+}
+
+/* 5. Rolodex Card (Contact / Transmissions) */
+.rolodex-card {
+    grid-column: span 4;
+    background: var(--parchment);
+    min-height: 180px;
+    padding: 1.4rem 1.2rem;
+    box-shadow: 3px 5px 15px rgba(0,0,0,0.45);
+    transform: rotate(-1.5deg);
+    border: 1px solid #e1cfb4;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+}
+
+.paperclip {
+    position: absolute;
+    top: -8px;
+    left: 20px;
+    width: 12px;
+    height: 32px;
+    border: 3px solid #b8b8b8;
+    border-radius: 8px;
+    box-shadow: 1px 1px 3px rgba(0,0,0,0.4);
+    z-index: 2;
+}
+
+.dispatch-badge {
+    font-family: var(--font-typewriter);
+    font-size: 0.7rem;
+    color: #2b3a67;
+    border: 1px solid #2b3a67;
+    padding: 2px 6px;
+    letter-spacing: 0.08rem;
+    font-weight: bold;
+}
+
+.rolodex-title {
+    font-family: var(--font-typewriter);
+    font-size: 1.15rem;
+    font-weight: bold;
+    color: var(--ink-black);
+    margin-top: 0.8rem;
+}
+
+.rolodex-sub {
+    font-family: var(--font-mono);
+    font-size: 0.8rem;
+    color: var(--ink-faded);
+    margin-top: 0.3rem;
+}
+
+.rolodex-card .click-tag {
+    margin-top: auto;
+}
+
+/* 6. Pinned Evidence Ticket (Homework 7 Working Link) */
+.evidence-tag {
+    grid-column: span 12;
+    background: #eed8b1;
+    border: 2px dashed #997b53;
+    padding: 1.2rem 1.8rem;
+    box-shadow: 3px 5px 14px rgba(0,0,0,0.4);
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 0.5rem;
+    transform: rotate(0.5deg);
+    cursor: default;
+}
+
+.evidence-tag:hover {
+    transform: translateY(-4px) scale(1.01) !important;
+}
+
+.tag-eyelet {
+    position: absolute;
+    left: -10px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 20px;
+    height: 20px;
+    background: #eed8b1;
+    border: 3px solid #8c683b;
+    border-radius: 50%;
+    box-shadow: 0 0 5px rgba(0,0,0,0.3);
+}
+
+.evidence-stamp {
+    font-family: var(--font-typewriter);
+    font-size: 0.85rem;
+    color: var(--crimson-stamp);
+    font-weight: bold;
+    letter-spacing: 0.1rem;
+    border: 1px solid var(--crimson-stamp);
+    padding: 2px 6px;
+    display: inline-block;
+    margin-bottom: 0.3rem;
+}
+
+.tag-title {
+    font-family: var(--font-typewriter);
+    font-size: 1.1rem;
+    font-weight: bold;
+    color: var(--ink-black);
+}
+
+.tag-meta {
+    font-family: var(--font-mono);
+    font-size: 0.8rem;
+    color: var(--ink-faded);
+}
+
+/* The REQUIRED Homework 7 Link */
+.hw7-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    background: var(--crimson-stamp);
+    color: #fff;
+    padding: 0.75rem 1.5rem;
+    text-decoration: none;
+    font-family: var(--font-typewriter);
+    font-size: 0.95rem;
+    font-weight: bold;
+    border-radius: 4px;
+    border: 1px solid #661213;
+    box-shadow: 2px 3px 6px rgba(0,0,0,0.3);
+    transition: var(--transition-snappy);
+}
+
+.hw7-link:hover, .hw7-link:focus-visible {
+    background: #be3233;
+    color: #ffffff;
+    transform: scale(1.05);
+    box-shadow: 0 0 12px var(--crimson-glow);
+    outline: none;
+}
+
+/* Desk Props (Fountain Pen & Clips) */
+.fountain-pen {
+    position: absolute;
+    bottom: -15px;
+    right: 40px;
+    width: 140px;
+    height: 12px;
+    background: linear-gradient(90deg, #090909 70%, var(--brass-gold) 75%, #090909 85%);
+    border-radius: 6px 15px 15px 6px;
+    box-shadow: 2px 5px 8px rgba(0,0,0,0.6);
+    transform: rotate(-15deg);
+    pointer-events: none;
+}
+
+.pen-nib {
+    position: absolute;
+    left: -14px;
+    top: 1px;
+    width: 0;
+    height: 0;
+    border-top: 5px solid transparent;
+    border-bottom: 5px solid transparent;
+    border-right: 15px solid var(--brass-gold);
+}
+
+/* Desk Name Plaque (Informational Only - NOT a footer or nav bar) */
+.desk-plaque {
+    margin-top: 2rem;
+    background: linear-gradient(180deg, #e3c47a, var(--brass-gold), #835f1a);
+    padding: 0.6rem 2rem;
+    border-radius: 4px;
+    border: 1px solid #ffe6a3;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.6), inset 0 1px 2px rgba(255,255,255,0.4);
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+}
+
+.plaque-text {
+    font-family: var(--font-typewriter);
+    font-size: 0.85rem;
+    font-weight: bold;
+    color: #1a1205;
+    letter-spacing: 0.12rem;
+    text-shadow: 0 1px 0 rgba(255,255,255,0.4);
+    text-align: center;
+}
+
+.brass-screw {
+    width: 8px;
+    height: 8px;
+    background: #6a4911;
+    border-radius: 50%;
+    position: relative;
+    box-shadow: inset 0 1px 2px #000;
+}
+
+.brass-screw::after {
+    content: '';
+    position: absolute;
+    top: 3px;
+    left: 1px;
+    width: 6px;
+    height: 2px;
+    background: #d8b261;
+}
+
+/* ==========================================================================
+   INSPECTION DOSSIER MODAL OVERLAY
+   Opens when clicking Polaroid, Manila Folder, Field Notebook, or Rolodex
+   ========================================================================== */
+
+.inspector-overlay {
+    position: fixed;
+    inset: 0;
+    z-index: 100;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 1.5rem;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s ease, visibility 0.3s ease;
+}
+
+.inspector-overlay.active {
+    opacity: 1;
+    visibility: visible;
+}
+
+.inspector-backdrop {
+    position: absolute;
+    inset: 0;
+    background: rgba(10, 6, 4, 0.85);
+    backdrop-filter: blur(4px);
+}
+
+.dossier-card {
+    position: relative;
+    z-index: 2;
+    background-color: var(--parchment);
+    width: 100%;
+    max-width: 780px;
+    max-height: 85vh;
+    border-radius: 4px;
+    box-shadow: 0 20px 50px rgba(0,0,0,0.8), 0 0 0 1px #d6c4a5;
+    display: flex;
+    flex-direction: column;
+    transform: translateY(20px) scale(0.97);
+    transition: transform 0.3s cubic-bezier(0.2, 0.8, 0.2, 1);
+    border-top: 6px solid var(--crimson-stamp);
+}
+
+.inspector-overlay.active .dossier-card {
+    transform: translateY(0) scale(1);
+}
+
+.dossier-header {
+    padding: 1.2rem 1.8rem;
+    border-bottom: 2px solid var(--parchment-shadow);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: rgba(0,0,0,0.02);
+}
+
+.dossier-classification {
+    font-family: var(--font-typewriter);
+    font-weight: bold;
+    color: var(--crimson-stamp);
+    letter-spacing: 0.15rem;
+    font-size: 0.95rem;
+}
+
+.close-wax-seal {
+    background: var(--crimson-stamp);
+    color: #fff;
+    border: none;
+    padding: 0.4rem 1rem;
+    font-family: var(--font-typewriter);
+    font-size: 0.85rem;
+    cursor: pointer;
+    border-radius: 3px;
+    box-shadow: 1px 2px 4px rgba(0,0,0,0.3);
+    transition: var(--transition-snappy);
+}
+
+.close-wax-seal:hover {
+    background: #7a1f20;
+    transform: scale(1.05);
+}
+
+.dossier-scroll-area {
+    padding: 2rem 2.2rem;
+    overflow-y: auto;
+    max-height: calc(85vh - 130px);
+    scrollbar-width: thin;
+    scrollbar-color: var(--crimson-stamp) var(--parchment-shadow);
+}
+
+.dossier-scroll-area::-webkit-scrollbar {
+    width: 8px;
+}
+.dossier-scroll-area::-webkit-scrollbar-thumb {
+    background: var(--crimson-stamp);
+    border-radius: 4px;
+}
+.dossier-scroll-area::-webkit-scrollbar-track {
+    background: var(--parchment-shadow);
+}
+
+.dossier-footer {
+    padding: 0.8rem 1.8rem;
+    border-top: 1px solid var(--parchment-shadow);
+    display: flex;
+    justify-content: space-between;
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    color: var(--ink-faded);
+    background: rgba(0,0,0,0.02);
+}
+
+/* Modal Internal Typography & Card Elements */
+.dossier-heading {
+    font-family: var(--font-typewriter);
+    font-size: 1.6rem;
+    color: var(--ink-black);
+    margin-bottom: 0.4rem;
+}
+
+.dossier-subheading {
+    font-family: var(--font-mono);
+    font-size: 0.9rem;
+    color: var(--crimson-stamp);
+    margin-bottom: 1.5rem;
+    font-weight: bold;
+}
+
+.dossier-profile-layout {
+    display: flex;
+    gap: 2rem;
+    align-items: flex-start;
+    margin-bottom: 1.5rem;
+}
+
+.dossier-photo-box {
+    width: 140px;
+    height: 140px;
+    background: #2b1f18;
+    border: 3px solid #fff;
+    box-shadow: 2px 4px 10px rgba(0,0,0,0.3);
+    flex-shrink: 0;
+    overflow: hidden;
+}
+
+.dossier-photo-box img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center 20%;
+    filter: contrast(1.02);
+}
+
+.dossier-bio {
+    font-size: 0.95rem;
+    line-height: 1.65;
+}
+
+.bio-point {
+    margin-bottom: 0.6rem;
+}
+
+.bio-point strong {
+    font-family: var(--font-typewriter);
+    color: var(--ink-black);
+}
+
+/* Project Cards in Modal */
+.projects-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1.2rem;
+}
+
+.case-card {
+    background: #fff;
+    border: 1px solid #dcd1be;
+    border-left: 5px solid var(--brass-gold);
+    padding: 1.2rem;
+    box-shadow: 2px 3px 8px rgba(0,0,0,0.08);
+}
+
+.case-card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    margin-bottom: 0.4rem;
+}
+
+.case-title {
+    font-family: var(--font-typewriter);
+    font-size: 1.15rem;
+    font-weight: bold;
+}
+
+.case-status {
+    font-size: 0.75rem;
+    font-family: var(--font-typewriter);
+    color: #2b6b35;
+    font-weight: bold;
+}
+
+.case-desc {
+    font-size: 0.9rem;
+    color: #333;
+    margin-bottom: 0.8rem;
+}
+
+.case-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.4rem;
+}
+
+.case-tag {
+    background: #e9e2d3;
+    padding: 2px 8px;
+    font-size: 0.75rem;
+    font-family: var(--font-mono);
+    border-radius: 3px;
+    color: #333;
+}
+
+/* Skills List in Modal */
+.skills-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 1.2rem;
+}
+
+.skill-category {
+    background: #fff;
+    padding: 1rem 1.2rem;
+    border: 1px solid #ded5c5;
+    border-top: 3px solid var(--crimson-stamp);
+}
+
+.category-title {
+    font-family: var(--font-typewriter);
+    font-size: 1rem;
+    color: var(--crimson-stamp);
+    margin-bottom: 0.75rem;
+    font-weight: bold;
+}
+
+.skill-list {
+    list-style: none;
+}
+
+.skill-list li {
+    font-size: 0.85rem;
+    margin-bottom: 0.4rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.skill-list li::before {
+    content: '✓';
+    color: var(--crimson-stamp);
+    font-weight: bold;
+}
+
+/* Contact List in Modal */
+.contact-channels {
+    display: grid;
+    gap: 1rem;
+}
+
+.channel-item {
+    background: #fff;
+    padding: 1rem;
+    border: 1px dashed #c0b49f;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.channel-label {
+    font-family: var(--font-typewriter);
+    font-weight: bold;
+}
+
+.channel-value {
+    color: var(--crimson-stamp);
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.channel-value:hover {
+    text-decoration: underline;
+}
+
+/* Interactive Toast Notification */
+.desk-toast {
+    position: fixed;
+    bottom: 2rem;
+    left: 50%;
+    transform: translateX(-50%) translateY(100px);
+    background: #191614;
+    color: var(--brass-highlight);
+    border: 1px solid var(--brass-gold);
+    padding: 0.75rem 1.5rem;
+    border-radius: 4px;
+    font-family: var(--font-typewriter);
+    font-size: 0.9rem;
+    box-shadow: 0 8px 24px rgba(0,0,0,0.6);
+    z-index: 110;
+    opacity: 0;
+    transition: transform 0.3s cubic-bezier(0.2, 0.8, 0.2, 1), opacity 0.3s ease;
+    pointer-events: none;
+}
+
+.desk-toast.show {
+    transform: translateX(-50%) translateY(0);
+    opacity: 1;
+}
+
+/* ==========================================================================
+   RESPONSIVE DESIGN (Adaptive Detective Workspace)
+   ========================================================================== */
+
+@media (max-width: 980px) {
+    .desk-mat {
+        grid-template-columns: repeat(6, 1fr);
+        padding: 1.8rem 1.2rem;
+    }
+    
+    .concept-paper {
+        grid-column: span 6;
+        transform: none;
+    }
+
+    .polaroid-frame {
+        grid-column: span 6;
+        max-width: 320px;
+        margin: 0 auto;
+        transform: rotate(1deg);
+    }
+
+    .manila-folder {
+        grid-column: span 3;
+    }
+
+    .field-notebook {
+        grid-column: span 3;
+    }
+
+    .rolodex-card {
+        grid-column: span 6;
+    }
+
+    .evidence-tag {
+        grid-column: span 6;
+        flex-direction: column;
+        text-align: center;
+        gap: 1rem;
+    }
+}
+
+@media (max-width: 640px) {
+    .lamp-wrapper, .coffee-mug {
+        position: static;
+        margin-bottom: 1rem;
+    }
+
+    .desk-container {
+        padding-top: 1rem;
+    }
+
+    .desk-mat {
+        grid-template-columns: 1fr;
+        padding: 1.2rem 0.8rem;
+    }
+
+    .concept-paper, 
+    .polaroid-frame, 
+    .manila-folder, 
+    .field-notebook, 
+    .rolodex-card, 
+    .evidence-tag {
+        grid-column: 1 / -1;
+        transform: none !important;
+    }
+
+    .dossier-profile-layout {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+    }
+
+    .plaque-text {
+        font-size: 0.7rem;
+    }
+}

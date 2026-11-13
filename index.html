@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bumbi | Detective Case Board Portfolio</title>
+    <!-- Unique Google Fonts: Special Elite (Typewriter) and Courier Prime -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Courier+Prime:ital,wght@0,400;0,700;1,400&family=Special+Elite&display=swap" rel="stylesheet">
+    <!-- Main Stylesheet -->
+    <link rel="stylesheet" href="style.css">
+</head>
+<body class="desk-body lamp-on">
+
+    <!-- NO header, footer, or navigation bar as per requirements -->
+
+    <!-- Ambient Lighting & Vignette Overlay -->
+    <div class="ambient-glow" id="ambientGlow"></div>
+    <div class="vignette-overlay"></div>
+
+    <!-- Main Interactive Workspace -->
+    <main class="desk-container" id="deskContainer">
+
+        <!-- Top Row Controls / Ambiance -->
+        <div class="desk-accessory lamp-wrapper" id="lampWrapper" title="Toggle Desk Lamp">
+            <div class="lamp-head">
+                <div class="lamp-bulb"></div>
+            </div>
+            <div class="lamp-neck"></div>
+            <div class="lamp-base">
+                <button class="lamp-switch" id="lampSwitch" aria-label="Toggle Desk Lamp">
+                    <span class="switch-toggle"></span>
+                </button>
+            </div>
+            <span class="object-tag">Brass Desk Lamp (Click Switch)</span>
+        </div>
+
+        <div class="desk-accessory coffee-mug" id="coffeeMug" title="Fresh Coffee - Click for a sip">
+            <div class="mug-surface">
+                <div class="coffee-liquid">
+                    <div class="coffee-ripple"></div>
+                </div>
+            </div>
+            <div class="mug-handle"></div>
+            <span class="object-tag">Study Coffee</span>
+        </div>
+
+        <div class="audio-toggle-container">
+            <button id="soundToggleBtn" class="desk-pill-btn" aria-label="Toggle Desk Sound FX">
+                <span class="sound-icon">🔊</span> Sound: <span id="soundStatusText">ON</span>
+            </button>
+        </div>
+
+        <!-- The Central Leather Desk Mat (The Detective Case Board) -->
+        <div class="desk-mat">
+            
+            <!-- 1. The Pinned Concept Document (Explains the Unconventional Concept) -->
+            <article class="desk-item concept-paper" id="conceptPaper" tabindex="0" role="region" aria-label="Portfolio Concept Document">
+                <div class="pushpin red-pin"></div>
+                <div class="paper-watermark">CONFIDENTIAL</div>
+                <div class="typewriter-header">
+                    <span class="case-file-no">CASE FILE: #CRP-2026-HEUSER</span>
+                    <span class="date-stamp">LOCATION: KARACHI, PK</span>
+                </div>
+                <h1 class="concept-title">BUMBI // INVESTIGATIVE DOSSIER</h1>
+                <h2 class="concept-subtitle">HEUSER COLLEGE &bull; CAREER READINESS PROGRAM</h2>
+                <hr class="typewriter-rule">
+                <!-- Short 2-3 sentence text block explaining the unconventional concept -->
+                <p class="concept-body">
+                    This portfolio replaces traditional navigation bars with an interactive detective case board where clicking clues reveals different parts of my profile. Every physical artifact scattered across this workspace represents an investigative clue into my academic journey, creative passions, and technical ventures. Click or tap any clue resting on the desk to inspect the evidence and explore my work.
+                </p>
+                <div class="signature-block">
+                    <span class="ink-stamp approved-stamp">TOP CANDIDATE</span>
+                    <span class="scribble-sig">Bumbi &mdash; Heuser College</span>
+                </div>
+            </article>
+
+            <!-- 2. Polaroid Photo Frame with Bumbi's Real Profile Picture (Clickable: Opens About Dossier) -->
+            <div class="desk-item polaroid-frame" id="polaroidItem" role="button" tabindex="0" aria-label="Inspect Bumbi's Profile Picture and Detective Dossier">
+                <div class="scotch-tape"></div>
+                <div class="photo-container">
+                    <!-- Real Profile Picture: me.jpeg (with me.jpg fallback) -->
+                    <img src="me.jpeg" 
+                         alt="Bumbi - AS Level Student Profile Picture" 
+                         class="profile-img"
+                         id="profileImage"
+                         onerror="if(!this.dataset.tried){this.dataset.tried='1';this.src='me.jpg';}">
+                </div>
+                <div class="polaroid-caption">
+                    <p class="agent-title">SUBJECT: BUMBI</p>
+                    <p class="agent-subtitle">AS LEVEL // HEUSER COLLEGE</p>
+                    <p class="click-hint">[ Click to Inspect Dossier ]</p>
+                </div>
+            </div>
+
+            <!-- 3. Manila Case File Folder (Clickable: Opens Projects List) -->
+            <div class="desk-item manila-folder" id="folderItem" role="button" tabindex="0" aria-label="Open Case Files and Projects">
+                <div class="folder-tab">
+                    <span class="tab-label">CONFIDENTIAL: CASE FILES</span>
+                </div>
+                <div class="folder-body">
+                    <div class="folder-seal">ACTIVE CASES</div>
+                    <div class="folder-content-peek">
+                        <span class="peek-line"></span>
+                        <span class="peek-line short"></span>
+                    </div>
+                    <p class="folder-title">PROJECTS &amp; VENTURES</p>
+                    <p class="folder-desc">Web Dev, Creative Design, MUN &amp; Startups</p>
+                    <span class="click-tag">📂 Click to Open Folder</span>
+                </div>
+            </div>
+
+            <!-- 4. Field Notebook / Skills Log (Clickable: Opens Skills & Tools) -->
+            <div class="desk-item field-notebook" id="notebookItem" role="button" tabindex="0" aria-label="Open Field Notebook, Skills and Future Goals">
+                <div class="notebook-binding"></div>
+                <div class="notebook-cover">
+                    <div class="notebook-label">FIELD NOTES &amp; AMBITIONS</div>
+                    <div class="elastic-band"></div>
+                    <p class="notebook-subtitle">Skills, Leadership &amp; University Goals</p>
+                    <span class="click-tag">📓 Click to Read Notes</span>
+                </div>
+            </div>
+
+            <!-- 5. Rolodex / Wire Dispatch (Clickable: Opens Contact Coordinates) -->
+            <div class="desk-item rolodex-card" id="rolodexItem" role="button" tabindex="0" aria-label="Open Communication Channels and Contact">
+                <div class="paperclip silver-clip"></div>
+                <div class="rolodex-header">
+                    <span class="dispatch-badge">DISPATCH DESK</span>
+                </div>
+                <p class="rolodex-title">COMMUNICATION WIRES</p>
+                <p class="rolodex-sub">Karachi HQ &bull; Network &amp; Inquiries</p>
+                <span class="click-tag">📟 Click to Transmit</span>
+            </div>
+
+            <!-- 6. Pinned Evidence Ticket (Direct Link to Homework 7 Styled as Case Evidence) -->
+            <div class="desk-item evidence-tag" id="hw7Ticket">
+                <div class="tag-string"></div>
+                <div class="tag-eyelet"></div>
+                <div class="tag-body">
+                    <span class="evidence-stamp">EVIDENCE DOCKET #07</span>
+                    <p class="tag-title">CASE FILE: PREVIOUS INVESTIGATION</p>
+                    <p class="tag-meta">Homework 7 Assignment Documentation &amp; Live Build</p>
+                    <!-- REQUIRED WORKING LINK TO HOMEWORK 7 -->
+                    <a href="../Homework_7/index.html" class="hw7-link" id="hw7Link" title="Inspect Homework 7 Case File">
+                        Open Case File #07 ↗
+                    </a>
+                </div>
+            </div>
+
+            <!-- Vintage Desk Props (Visual Ambiance) -->
+            <div class="desk-prop fountain-pen" title="Vintage Fountain Pen">
+                <div class="pen-body"></div>
+                <div class="pen-nib"></div>
+            </div>
+
+            <div class="desk-prop paperclips-pile" title="Brass Fasteners">
+                <div class="clip c1"></div>
+                <div class="clip c2"></div>
+            </div>
+
+        </div> <!-- /desk-mat -->
+
+        <!-- Subtle Desk Plaque (Informative Tactile Plate - NOT a nav bar or footer) -->
+        <div class="desk-plaque">
+            <span class="brass-screw left"></span>
+            <span class="plaque-text">BUMBI &mdash; HEUSER COLLEGE &bull; CAREER READINESS PROGRAM &mdash; INTERACTIVE CASE BOARD</span>
+            <span class="brass-screw right"></span>
+        </div>
+
+    </main>
+
+    <!-- Inspection Modal Overlay (Opens dynamically when desk objects are clicked) -->
+    <div class="inspector-overlay" id="inspectorOverlay" aria-hidden="true" role="dialog" aria-modal="true">
+        <div class="inspector-backdrop" id="inspectorBackdrop"></div>
+        <div class="dossier-card" id="dossierCard">
+            
+            <!-- Dossier Top Bar -->
+            <div class="dossier-header">
+                <div class="dossier-classification" id="dossierClassification">CONFIDENTIAL DOSSIER</div>
+                <button class="close-wax-seal" id="closeDossierBtn" aria-label="Close Dossier Inspection">
+                    <span class="seal-text">✕ CLOSE</span>
+                </button>
+            </div>
+
+            <!-- Dynamic Body Injected by JavaScript -->
+            <div class="dossier-scroll-area" id="dossierContent">
+                <!-- Content injected via script.js -->
+            </div>
+
+            <!-- Dossier Base Stamp -->
+            <div class="dossier-footer">
+                <span class="dossier-footer-ref">EVIDENCE RECORD: BUMBI'S ACADEMIC &amp; TECH DOSSIER</span>
+                <span class="dossier-footer-esc">[ Press ESC or click Close to return to desk ]</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Notification Toast for Desk Interactivity -->
+    <div class="desk-toast" id="deskToast" role="status" aria-live="polite"></div>
+
+    <!-- Scripts -->
+    <script src="script.js"></script>
+</body>
+</html>
